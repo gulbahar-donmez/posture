@@ -8,10 +8,7 @@ __pycache__/
 *.pyc
 *.pyo
 .venv/
-env/
-frontend/.env
 *.log
-*.env
 secret.key
 frontend/node_modules/
 .DS_Store

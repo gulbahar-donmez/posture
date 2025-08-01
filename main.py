@@ -3,8 +3,6 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from dotenv import load_dotenv
 import os
-
-# YENİ: .env dosyasındaki değişkenleri uygulamanın en başında yükle
 load_dotenv()
 
 from database import engine, Base
@@ -14,18 +12,12 @@ from routers.chatbot import router as chatbot
 from fastapi_limiter import FastAPILimiter
 import redis.asyncio as redis
 
-# Uygulamayı burada oluşturuyoruz.
 app = FastAPI(title="PostureGuard API", version="1.0.0")
 
 
-# Veritabanı ve Redis bağlantılarını "startup" olayına taşıyoruz.
 @app.on_event("startup")
 async def startup_event():
-    # Bu satır, veritabanı tablolarının uygulama başladığında oluşturulmasını sağlar.
-    # Artık "alembic upgrade head" komutuna ihtiyacınız YOK.
     Base.metadata.create_all(bind=engine)
-
-    # Redis bağlantısını ve limiter'ı başlat
     redis_url = os.getenv("REDIS_URL")
     try:
         redis_connection = redis.from_url(redis_url, encoding="utf-8", decode_responses=True)

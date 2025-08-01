@@ -1,37 +1,21 @@
-# Docker'a özgü dosyalar
 Dockerfile
 docker-compose.yml
 .dockerignore
-
-# Python sanal ortam klasörleri
 .venv
 venv
 env
-
-# Python cache ve derlenmiş dosyaları
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-
-# IDE proje klasörleri
 .idea/
 .vscode/
-
-# Git dosyaları
 .git
 .gitignore
 .gitattributes
-
-# Frontend kaynak dosyaları (sadece build edilmiş 'static' klasörü gerekli)
-# BU EN ÖNEMLİ KISIM!
 frontend/
 node_modules/
-
-# Test klasörleri
 tests/
-
-# Yerel veri/model dosyaları (eğer varsa)
 *.csv
 *.json
 *.md

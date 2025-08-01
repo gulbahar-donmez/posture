@@ -1,5 +1,4 @@
 services:
-  # 1. Backend Servisi (FastAPI Uygulaması)
   backend:
     build: .
     container_name: postureguard_backend
@@ -17,7 +16,6 @@ services:
     networks:
       - postureguard-net
 
-  # 2. Veritabanı Servisi (PostgreSQL)
   db:
     image: postgres:13
     container_name: postureguard_db
@@ -33,7 +31,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # 3. Redis Servisi
   redis:
     image: redis:alpine
     container_name: postureguard_redis

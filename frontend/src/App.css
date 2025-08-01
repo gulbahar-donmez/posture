@@ -656,7 +656,8 @@ html {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
-
+    
+    /* Modern form inputs for tablet */
     .modern-input {
         padding: 1.2rem 1rem 1.2rem 3.5rem !important;
         font-size: 1rem !important;
@@ -675,6 +676,7 @@ html {
     }
 }
 
+/* Modal responsive styles for mobile */
 .modal {
     display: flex;
     position: fixed;
@@ -702,6 +704,7 @@ html {
     overflow-y: auto;
 }
 
+/* Mobile optimizations for modals */
 @media (max-width: 768px) {
     .modal {
         padding: 0.5rem;
@@ -788,13 +791,13 @@ html {
     .modal-content .form-group input {
         padding: 0.875rem 0.75rem;
         font-size: 1rem;
-        min-height: 48px;
+        min-height: 48px; /* Touch-friendly */
     }
     
     .modal-btn {
         padding: 0.875rem 1.25rem;
         font-size: 1rem;
-        min-height: 48px;
+        min-height: 48px; /* Touch-friendly */
         width: 100%;
     }
     
@@ -812,6 +815,7 @@ html {
     }
 }
 
+/* Dark mode support for modals */
 .App.dark-mode .modal-content {
     background: #1e293b;
     color: #e2e8f0;
@@ -858,6 +862,7 @@ html {
     color: #10b981;
 }
 
+/* Light mode support for modals */
 .App.light-mode .modal-content {
     background: white;
     color: #1f2937;
@@ -947,7 +952,8 @@ html {
         font-size: 0.95rem;
         margin-bottom: 1.5rem;
     }
-
+    
+    /* Modern form inputs for mobile */
     .modern-input {
         padding: 1.25rem 1rem 1.25rem 3.5rem !important;
         font-size: 1.1rem !important;
@@ -2947,7 +2953,8 @@ html {
         opacity: 1;
         pointer-events: all;
     }
-
+    
+    /* Mobil menü açıkken chatbot'u gizle */
     body.mobile-menu-open [style*="position: fixed"][style*="bottom: 30px"][style*="right: 30px"],
     body.mobile-menu-open [style*="position: fixed"][style*="bottom: 30px"][style*="right: 30px"] *,
     .mobile-menu-open [style*="position: fixed"][style*="bottom: 30px"][style*="right: 30px"] {
@@ -2957,18 +2964,23 @@ html {
         pointer-events: none !important;
         z-index: -1 !important;
     }
+    
+    /* Chatbot genel gizleme mobil menü açıkken */
     @media (max-width: 768px) {
+        /* Mobil menü açıkken chatbot'u gizle */
         body.mobile-menu-open div[style*="position: fixed"][style*="bottom: 30px"][style*="right: 30px"] {
             display: none !important;
             visibility: hidden !important;
             opacity: 0 !important;
             pointer-events: none !important;
         }
-
+        
+        /* Chatbot container'larını gizle */
         body.mobile-menu-open div[style*="z-index: 999"] {
             display: none !important;
         }
-
+        
+        /* Tüm fixed elementleri kontrol et */
         body.mobile-menu-open [style*="position: fixed"][style*="bottom"] {
             z-index: -1 !important;
         }
@@ -3019,7 +3031,8 @@ html {
         transform: scale(1.05);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
     }
-
+    
+    /* Modern menu icon animations */
     .mobile-menu-toggle.active {
         background: var(--accent-primary) !important;
         border-color: var(--accent-primary) !important;
@@ -3030,7 +3043,8 @@ html {
         color: white !important;
         transform: rotate(90deg);
     }
-
+    
+    /* Mobil menü stilleri */
     .mobile-menu {
         position: fixed;
         top: 70px;
@@ -3175,7 +3189,8 @@ html {
         transform: translateY(-2px);
         box-shadow: 0 8px 25px rgba(var(--accent-primary-rgb), 0.3);
     }
-
+    
+    /* Animasyonlar */
     @keyframes slideDown {
         from {
             opacity: 0;
@@ -3315,7 +3330,8 @@ html {
         margin-top: 70px;
         text-align: center;
     }
-
+    
+    /* Genel mobil ortalama stilleri */
     section {
         text-align: center;
         padding-left: 1rem;
@@ -3341,7 +3357,8 @@ html {
         align-items: center;
         justify-content: center;
     }
-
+    
+    /* Grid'leri mobilde tek sütun yap */
     .grid,
     .features-grid,
     .solutions-grid,
@@ -3353,7 +3370,8 @@ html {
         text-align: center;
         gap: 1rem;
     }
-
+    
+    /* Card'ları ortala */
     .card,
     .feature-card,
     .solution-card {
@@ -3447,7 +3465,8 @@ html {
         padding: 0.8rem 0.3rem;
         text-align: center;
     }
-
+    
+    /* Çok küçük ekranlar için ortalama */
     section {
         text-align: center;
         padding-left: 0.8rem;
@@ -3604,7 +3623,7 @@ html {
     cursor: pointer;
     transition: all 0.3s ease;
     color: #64748b;
-    min-height: 44px;
+    min-height: 44px; /* Touch-friendly minimum */
 }
 
 .toggle-btn.active {
@@ -3618,6 +3637,7 @@ html {
     background: rgba(16, 185, 129, 0.05);
 }
 
+/* Mobile responsive for form toggle */
 @media (max-width: 768px) {
     .form-toggle {
         margin-bottom: 1.5rem;
@@ -3627,7 +3647,7 @@ html {
     .toggle-btn {
         padding: 1rem 1.2rem;
         font-size: 1rem;
-        min-height: 48px;
+        min-height: 48px; /* Better touch target */
     }
 }
 
@@ -4091,6 +4111,7 @@ html {
   margin-top: 3rem;
 }
 
+/* Mobile Responsive Styles for Posture Problems Section */
 @media (max-width: 1024px) {
   .problems-content {
     padding: 0 1.5rem;
@@ -4814,6 +4835,7 @@ html {
   flex-wrap: wrap;
 }
 
+/* Mobile Responsive Styles for Solution Section */
 @media (max-width: 1024px) {
   .solution-content {
     padding: 0 1.5rem;
@@ -5770,6 +5792,7 @@ html {
   transform: scale(1.05);
 }
 
+/* Solution Section Modern Icon Styles */
 .solution-icon-modern {
   display: flex;
   align-items: center;
@@ -5917,6 +5940,7 @@ html {
     0 0 30px rgba(245, 158, 11, 0.2) !important;
 }
 
+/* Benefit Icon Modern Styles */
 .benefit-icon-modern {
   display: flex;
   align-items: center;
@@ -5931,6 +5955,7 @@ html {
   border-radius: 12px;
 }
 
+/* Enhanced Solution Card Content */
 .solution-card h4 {
   font-size: 1.25rem;
   font-weight: 700;
@@ -5954,6 +5979,7 @@ html {
   color: var(--text-primary);
 }
 
+/* Dark Mode Adjustments */
 .App.dark-mode .icon-bg-gradient {
   box-shadow: 
     0 8px 25px rgba(0, 0, 0, 0.4),
@@ -5966,6 +5992,7 @@ html {
     0 6px 16px rgba(0, 0, 0, 0.4);
 }
 
+/* Advanced Icon Animations */
 @keyframes shimmer {
   0% {
     transform: translateX(-100%);
@@ -6025,6 +6052,7 @@ html {
   animation: shimmer 1.5s ease-in-out;
 }
 
+/* Mobile Responsive Adjustments */
 @media (max-width: 768px) {
   .solution-grid {
     grid-template-columns: 1fr;
@@ -6224,6 +6252,7 @@ html {
   z-index: 1001;
 }
 
+/* Show hamburger menu on mobile */
 @media (max-width: 768px) {
   .mobile-menu-toggle {
     display: flex !important;
@@ -6240,10 +6269,13 @@ html {
     left: auto;
     transform: none;
   }
-
+  
+  /* Mobilde brand text'i gizle, sadece logo göster */
   .brand-text {
     display: none !important;
   }
+  
+  /* Logo'yu mobil için optimize et */
   .logo-container {
     width: 45px !important;
     height: 45px !important;
@@ -6260,11 +6292,13 @@ html {
     width: 32px;
     height: 32px;
   }
-
+  
+  /* Container padding'ini mobil için ayarla */
   .nav-container {
     padding: 0 1rem;
   }
-
+  
+  /* Chatbot'u mobilde gizle */
   .chatbot-widget {
     display: none !important;
   }
@@ -6286,6 +6320,7 @@ html {
   border-radius: 2px;
 }
 
+/* Hamburger Menu Animation */
 .mobile-menu-toggle.active span:nth-child(1) {
   transform: rotate(-45deg) translate(-5px, 6px);
 }
@@ -6298,6 +6333,7 @@ html {
   transform: rotate(45deg) translate(-5px, -6px);
 }
 
+/* Mobile Menu Styles */
 .mobile-menu {
   position: fixed;
   top: 70px;
@@ -6358,6 +6394,7 @@ html {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
+/* Açık temada mobil menü yazıları siyah */
 .light-mode .mobile-nav-link {
   color: #1f2937;
   border: 1px solid rgba(0, 0, 0, 0.1);

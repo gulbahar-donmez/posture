@@ -1,18 +1,43 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+from dotenv import load_dotenv
+import os
+
+# YENİ: .env dosyasındaki değişkenleri uygulamanın en başında yükle
+load_dotenv()
+
 from database import engine, Base
-from routers import auth, posture_analyzer,result,live_posture_ai_enhanced, report_ai, contact
+from routers import auth, posture_analyzer, result, live_posture_ai_enhanced, report_ai, contact
 from fastapi.middleware.cors import CORSMiddleware
 from routers.chatbot import router as chatbot
 from fastapi_limiter import FastAPILimiter
 import redis.asyncio as redis
 
-Base.metadata.create_all(bind=engine)
+# Uygulamayı burada oluşturuyoruz.
 app = FastAPI(title="PostureGuard API", version="1.0.0")
 
+
+# Veritabanı ve Redis bağlantılarını "startup" olayına taşıyoruz.
 @app.on_event("startup")
-async def startup():
-    redis_connection = redis.from_url("redis://localhost:6379", encoding="utf-8", decode_responses=True)
-    await FastAPILimiter.init(redis_connection)
+async def startup_event():
+    # Bu satır, veritabanı tablolarının uygulama başladığında oluşturulmasını sağlar.
+    # Artık "alembic upgrade head" komutuna ihtiyacınız YOK.
+    Base.metadata.create_all(bind=engine)
+
+    # Redis bağlantısını ve limiter'ı başlat
+    redis_url = os.getenv("REDIS_URL")
+    try:
+        redis_connection = redis.from_url(redis_url, encoding="utf-8", decode_responses=True)
+        await FastAPILimiter.init(redis_connection)
+        print("Redis connection successful and FastAPILimiter initialized.")
+    except Exception as e:
+        print(f"Could not connect to Redis: {e}")
+
+
+# Mount static files for React build
+if os.path.exists("static"):
+    app.mount("/static", StaticFiles(directory="static"), name="static")
 
 origins = [
     "http://localhost:3000",
@@ -20,7 +45,7 @@ origins = [
     "http://localhost:8000",
     "http://localhost:8080",
     "http://localhost:3001",
-    ]
+]
 
 app.add_middleware(
     CORSMiddleware,
@@ -38,6 +63,18 @@ app.include_router(report_ai.router)
 app.include_router(chatbot)
 app.include_router(contact.router)
 
+
 @app.get("/", tags=["Root"])
 async def read_root():
     return {"message": "PostureGuard API is running!", "version": "1.0.0"}
+
+
+# Serve React app for all non-API routes
+@app.get("/{full_path:path}")
+async def serve_react_app(full_path: str):
+    if full_path.startswith(("api/", "docs", "openapi.json")):
+        return {"error": "Not found"}
+
+    if os.path.exists("static/index.html"):
+        return FileResponse("static/index.html")
+    return {"error": "React app not found"}

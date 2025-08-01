@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PostureAnalyzer - Profesyonel Duruş Analizi</title>
+    <style>
+/* login.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Poppins', sans-serif;
+}
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #7a5cff;
+    --background-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    --text-dark: #2c3e50;
+    --text-light: #7f8c8d;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--background-gradient);
+    perspective: 1000px;
+    background-attachment: fixed;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+/* ... login.css devamı ... */
+
+/* upload.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Poppins', sans-serif;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    overflow-x: hidden;
+}
+/* ... upload.css devamı ... */
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1e40af" stroke-width="2">
+                    <path d="M12 2L12 22M7 7L12 2L17 7"/>
+                </svg>
+                <h2>PostureAnalyzer</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link active">Anasayfa</a>
+                <a href="#upload" class="nav-link">Analiz Et</a>
+                <a href="#about" class="nav-link">Hakkımızda</a>
+                <a href="#contact" class="nav-link">İletişim</a>
+                <button class="nav-auth-btn" onclick="openLoginModal()">Giriş Yap</button>
+                <button class="nav-cta" onclick="openSignupModal()">Ücretsiz Kayıt</button>
+            </div>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">
+                        <span>✨ Yapay Zeka Destekli</span>
+                    </div>
+                    <h1>Zamandan Tasarruf Edin.<br>Netlik Kazanın.<br><span class="highlight">Her Değerlendirmeye Güvenin.</span></h1>
+                    <p class="hero-subtitle">Her Yerde, Her Zaman Değerlendirme!</p>
+                    <p class="hero-description">İhtiyacınız olan değerlendirmeleri alın—daha hızlı yapılmış, açıkça belgelenmiş ve etkileyecek şekilde tasarlanmış. Eğitin, bakım planlarını güçlendirin ve sonuçlarınızı pazarlayın.</p>
+                    <div class="hero-buttons">
+                        <button class="cta-primary" onclick="scrollToUpload()">Analizi Başlat</button>
+                        <button class="cta-secondary">Demo İzle ▶</button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <strong>10,000+</strong>
+                            <span>Analiz Yapıldı</span>
+                        </div>
+                        <div class="stat">
+                            <strong>98%</strong>
+                            <span>Doğruluk Oranı</span>
+                        </div>
+                        <div class="stat">
+                            <strong>5 Saniye</strong>
+                            <span>Ortalama Süre</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="main-device">
+                        <div class="device-frame">
+                            <div class="device-screen">
+                                <div class="app-interface">
+                                    <div class="app-header"></div>
+                                    <div class="posture-analysis">
+                                        <div class="analysis-grid"></div>
+                                        <div class="posture-figure"></div>
+                                        <div class="analysis-metrics">
+                                            <div class="metric good"></div>
+                                            <div class="metric warning"></div>
+                                            <div class="metric good"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="floating-cards">
+                        <div class="card card-1">
+                            <div class="card-icon">📊</div>
+                            <span>Detaylı Rapor</span>
+                        </div>
+                        <div class="card card-2">
+                            <div class="card-icon">⚡</div>
+                            <span>Hızlı Analiz</span>
+                        </div>
+                        <div class="card card-3">
+                            <div class="card-icon">🎯</div>
+                            <span>Yüksek Doğruluk</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload Section -->
+    <section id="upload" class="upload-section">
+        <div class="section-header">
+            <h2>Duruş Analizine Başlayın</h2>
+            <p>Fotoğrafınızı yükleyin, yapay zeka destekli sistemimiz saniyeler içinde profesyonel analiz sağlasın</p>
+        </div>
+        <div class="upload-container">
+            <div class="upload-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Fotoğraf Yükle</h3>
+                    <p>JPG, PNG veya WEBP formatında fotoğrafınızı yükleyin</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Analiz Bekle</h3>
+                    <p>Yapay zeka sistemimiz duruşunuzu analiz ediyor</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Rapor Al</h3>
+                    <p>Detaylı analiz raporunuzu indirin ve inceleyin</p>
+                </div>
+            </div>
+            
+            <div class="upload-card">
+                <div class="upload-area" id="dropZone">
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                    <div class="upload-content">
+                        <div class="upload-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="48" height="48">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            </svg>
+                        </div>
+                        <h3>Fotoğrafınızı buraya sürükleyin</h3>
+                        <p>veya <span class="file-select">dosya seçmek için tıklayın</span></p>
+                        <div class="upload-info">
+                            <span>📁 Desteklenen formatlar: JPG, PNG, WEBP</span>
+                            <span>📏 Maksimum dosya boyutu: 10MB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="preview-container" class="preview-container">
+                    <div class="preview-header">
+                        <h3>Önizleme</h3>
+                        <button class="change-photo" onclick="document.getElementById('fileInput').click()">Fotoğrafı Değiştir</button>
+                    </div>
+                    <img id="preview-image" src="" alt="Önizleme">
+                    <button id="analyze-btn" class="analyze-btn">
+                        <span class="btn-text">Analizi Başlat</span>
+                        <span class="btn-icon">→</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Profesyonel Duruş Analizi</h2>
+                    <p>PostureAnalyzer, yapay zeka destekli teknolojisiyle duruş bozukluklarını tespit eder ve kişiselleştirilmiş öneriler sunar. Sağlık profesyonelleri ve bireysel kullanıcılar için tasarlanmış modern bir çözüm.</p>
+                    <div class="features">
+                        <div class="feature">
+                            <div class="feature-icon">🎯</div>
+                            <div>
+                                <h4>Yüksek Doğruluk</h4>
+                                <p>%98 doğruluk oranıyla güvenilir sonuçlar</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">⚡</div>
+                            <div>
+                                <h4>Hızlı Analiz</h4>
+                                <p>Saniyeler içinde kapsamlı rapor</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">📊</div>
+                            <div>
+                                <h4>Detaylı Raporlama</h4>
+                                <p>Görsel ve sayısal analiz sonuçları</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="about-image"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2>İletişime Geçin</h2>
+                    <p>Sorularınız mı var? Profesyonel destek ekibimiz size yardımcı olmaya hazır.</p>
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div>
+                                <h4>E-posta</h4>
+                                <p>destek@postureanalyzer.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <h4>Telefon</h4>
+                                <p>+90 (212) 555 0123</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <h4>Adres</h4>
+                                <p>İstanbul, Türkiye</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Adınız Soyadınız" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="E-posta Adresiniz" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Mesajınız" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="contact-btn">Mesaj Gönder</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Giriş Yap</h2>
+                <span class="close" onclick="closeLoginModal()">&times;</span>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="text" id="username" placeholder="Kullanıcı Adı" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="Şifre" required>
+                </div>
+                <button type="submit" class="modal-btn">Giriş Yap</button>
+            </form>
+            <div class="modal-footer">
+                <p>Hesabınız yok mu? <a href="#" onclick="switchToSignup()">Kayıt Ol</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Kayıt Ol</h2>
+                <span class="close" onclick="closeSignupModal()">&times;</span>
+            </div>
+            <form id="signupForm">
+                <div class="form-group">
+                    <input type="text" id="newFullName" placeholder="Ad Soyad" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="newEmail" placeholder="E-posta" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="newUsername" placeholder="Kullanıcı Adı" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="newPassword" placeholder="Şifre" required>
+                </div>
+                <button type="submit" class="modal-btn">Kayıt Ol</button>
+            </form>
+            <div class="modal-footer">
+                <p>Zaten hesabınız var mı? <a href="#" onclick="switchToLogin()">Giriş Yap</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToUpload() {
+            document.getElementById('upload').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Navigation functionality
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        });
+
+        // Modal functions
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        function openSignupModal() {
+            document.getElementById('signupModal').style.display = 'block';
+        }
+
+        function closeSignupModal() {
+            document.getElementById('signupModal').style.display = 'none';
+        }
+
+        function switchToSignup() {
+            closeLoginModal();
+            openSignupModal();
+        }
+
+        function switchToLogin() {
+            closeSignupModal();
+            openLoginModal();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const loginModal = document.getElementById('loginModal');
+            const signupModal = document.getElementById('signupModal');
+            if (event.target == loginModal) {
+                closeLoginModal();
+            }
+            if (event.target == signupModal) {
+                closeSignupModal();
+            }
+        }
+    </script>
+</body>
+</html>

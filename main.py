@@ -14,7 +14,6 @@ import redis.asyncio as redis
 
 app = FastAPI(title="PostureGuard API", version="1.0.0")
 
-
 @app.on_event("startup")
 async def startup_event():
     Base.metadata.create_all(bind=engine)
@@ -26,17 +25,15 @@ async def startup_event():
     except Exception as e:
         print(f"Could not connect to Redis: {e}")
 
-
-# Mount static files for React build
-if os.path.exists("static"):
-    app.mount("/static", StaticFiles(directory="static"), name="static")
+# React build dosyaları varsa static olarak mount et
+if os.path.exists("frontend/build/static"):
+    app.mount("/static", StaticFiles(directory="frontend/build/static"), name="static")
 
 origins = [
+    "http://35.193.229.80/",
+    "https://35.193.229.80",
     "http://localhost:3000",
     "http://localhost:5173",
-    "http://localhost:8000",
-    "http://localhost:8080",
-    "http://localhost:3001",
 ]
 
 app.add_middleware(
@@ -55,18 +52,17 @@ app.include_router(report_ai.router)
 app.include_router(chatbot)
 app.include_router(contact.router)
 
-
 @app.get("/", tags=["Root"])
 async def read_root():
     return {"message": "PostureGuard API is running!", "version": "1.0.0"}
 
-
-# Serve React app for all non-API routes
+# React uygulaması için diğer tüm route'larda index.html döndür
 @app.get("/{full_path:path}")
 async def serve_react_app(full_path: str):
     if full_path.startswith(("api/", "docs", "openapi.json")):
         return {"error": "Not found"}
 
-    if os.path.exists("static/index.html"):
-        return FileResponse("static/index.html")
+    index_path = "frontend/build/index.html"
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
     return {"error": "React app not found"}

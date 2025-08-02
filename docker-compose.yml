@@ -42,6 +42,18 @@ services:
       timeout: 5s
       retries: 5
 
+  frontend:
+    image: nginx:alpine
+    container_name: postureguard_frontend
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend/build:/usr/share/nginx/html
+    depends_on:
+      - backend
+    networks:
+      - postureguard-net
+
 volumes:
   postgres_data:
 

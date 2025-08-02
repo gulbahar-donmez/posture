@@ -20,7 +20,7 @@
   },
   "scripts": {
   "start": "react-scripts start",
-  "build": "react-scripts build && if exist ..\\static (rmdir /s /q ..\\static) && rename build static && move static ..\\",
+  "build": "react-scripts build && rm -rf ../static && mv build ../static",
   "test": "react-scripts test",
   "eject": "react-scripts eject"
 },

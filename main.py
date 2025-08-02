@@ -30,8 +30,8 @@ if os.path.exists("frontend/build/static"):
     app.mount("/static", StaticFiles(directory="frontend/build/static"), name="static")
 
 origins = [
-    "http://35.192.212.10",
-    "https://35.192.212.10",
+    "http://34.66.16.230",
+    "https://34.66.16.230",
     "http://localhost:3000",
     "http://localhost:5173",
 ]

@@ -32,13 +32,12 @@ if os.path.exists("static"):
     app.mount("/static", StaticFiles(directory="static"), name="static")
 
 origins = [
+    "http://35.192.212.10",
+    "https://35.192.212.10",
     "http://localhost:3000",
     "http://localhost:5173",
-    "http://localhost:8000",
-    "http://localhost:8080",
-    "http://35.192.212.10",
-    "http://localhost:3001",
 ]
+
 
 app.add_middleware(
     CORSMiddleware,
